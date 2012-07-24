@@ -1,19 +1,20 @@
 module Gosling
 class Element
-  def initialize(locator, matcher = :xpath)
-    @element_localtor = locator
-    @matcher = matcher
+  def initialize(search)
+    @search = search
   end
 
   def wait_for_me(timout = 5)
-   wait = Object::Selenium::WebDriver::Wait.new({:timeout => timeout, :message => "Element not present in #{timeout} seconds"})  
-   wait.until do
-     @web_driver_element = @@driver.find(@matcher, @locator)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
+    wait.until do
+     #locator, location = @search.shift
+     @web_driver_element = Gosling::Browser.driver.find_element(@search)
    end
+   @web_driver_element
   end
   
   def method_missing(sym, *args, &block)
-    wait_for_me
+    wait_for_me(5)
     @web_driver_element.send sym, *args, &block
   end
 end

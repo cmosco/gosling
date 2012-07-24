@@ -9,7 +9,16 @@ module Gosling
           Browser.driver.navigate.to url      
         end
       end  
-      alias_method :direct_url, :page_url  
+
+        
+      def element(name, search)
+        define_method(name) do
+          webdriver_element = Element.new(search)
+          webdriver_element.wait_for_me
+        end
+      end
+      
+      
     end
   end
 end
