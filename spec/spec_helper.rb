@@ -13,3 +13,12 @@ Dir["#{File.dirname(__FILE__)}/pages/*.rb"].each { |f| require f }
 class RSpec::Core::ExampleGroup
   include Gosling::PageFactory
 end
+
+RSpec.configure do |config|
+  config.filter_run :focus => true unless ENV.has_key?('BUILD_NUMBER')
+  config.run_all_when_everything_filtered = true
+
+  config.before(:all) do
+    GC.disable
+  end
+end

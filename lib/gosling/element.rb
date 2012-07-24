@@ -1,28 +1,52 @@
 module Gosling
-class Element
+  class Element
+    
+    
+    def initialize(search, find = true)
+      @search = search
+      wait_for_me if find
+    end
+    
+    def element
+      wait_for_me if @webdriver_element.nil?
+      @webdriver_element
+    end
   
-  def initialize(search)
-    @search = search
-  end
-  
-  def value=(new_value)
-    wait_for_me
-    @web_driver_element.clear
-    @web_driver_element.send_keys(new_value)
-  end
+    def value=(new_value)
+      wait_for_me
+      @webdriver_element.clear
+      @webdriver_element.send_keys(new_value)
+    end
 
-  def wait_for_me(timeout = 5)
-    return @web_driver_element unless @web_driver_element.nil?
-    wait = Selenium::WebDriver::Wait.new(:timeout => timeout) # seconds
-    wait.until do
-     @web_driver_element = Gosling::Browser.driver.find_element(@search)
-   end
-   self
-  end
+    def wait_for_me(timeout = 5)
+      return @webdriver_element unless @webdriver_element.nil?
+      wait = Selenium::WebDriver::Wait.new(:timeout => timeout) # seconds
+      wait.until do
+        @webdriver_element = Gosling::Browser.driver.find_element(@search)
+      end
+    end
   
-  def method_missing(sym, *args, &block)
-    wait_for_me
-    @web_driver_element.send sym, *args, &block
+    def exists?
+      begin
+        Gosling::Browser.driver.find_element(@search)
+        true
+      rescue
+        false
+      end
+    end  
+
+    def wait_for_me_to_dissapear(timeout = 5)
+      wait = Selenium::WebDriver::Wait.new(:timeout => timeout) # seconds
+      wait.until do
+        !Gosling::Browser.driver.find_element(@search).displayed?
+      end
+    end
+  
+    def method_missing(sym, *args, &block)
+      wait_for_me if @web_driver_element
+      @webdriver_element.send sym, *args, &block
+    end
+    
+    
   end
-end
 end

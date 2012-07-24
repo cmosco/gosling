@@ -61,8 +61,7 @@ module Gosling
       
       def element(name, search)
         define_method(name) do
-          webdriver_element = Element.new(search)
-          webdriver_element.wait_for_me
+          Element.new(search, true)
         end  
       end
       
