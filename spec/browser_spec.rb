@@ -22,11 +22,20 @@ describe "Browser" do
     end
   end
   
+  it "should be on the right page" do
+    visit_page GooglePage do |p|
+      p.on_page_with_title?.should be_true
+      p.on_page_with_text?.should be_true
+      p.on_page_with_element?.should be_true
+      p.on_page?.should be_true
+    end
+  end
+  
+  
   it "should clear cookies" do
     visit_page GooglePage do |p|
     end
     Gosling::Browser.clear_cookies
-  
   end
   
 end

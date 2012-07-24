@@ -1,7 +1,6 @@
 require 'active_support'
 require 'gosling/version'
 require 'gosling/accessors'
-require 'gosling/page'
 require 'gosling/element'
 require 'gosling/browser'
 require 'gosling/page_factory'
