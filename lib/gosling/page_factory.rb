@@ -6,7 +6,7 @@ module Gosling
     end
 
     def on_page(page_class, visit=false, &block)
-      @current_page = page_class.new(@browser, visit)
+      @current_page = page_class.new(visit)
       block.call @current_page if block
       @current_page
     end

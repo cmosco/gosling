@@ -2,8 +2,8 @@ module Gosling
   class Page
     include Accessors
     
-      def initialize()
-        
+      def initialize(visit = false)
+                
       end
 end
 end

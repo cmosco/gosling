@@ -9,3 +9,7 @@ require 'pry'
 require 'gosling'
 
 Dir["#{File.dirname(__FILE__)}/pages/*.rb"].each { |f| require f }
+
+class RSpec::Core::ExampleGroup
+  include Gosling::PageFactory
+end

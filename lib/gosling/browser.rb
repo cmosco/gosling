@@ -2,8 +2,24 @@ module Gosling
   class Browser
     def self.driver
       @@driver ||= Selenium::WebDriver.for(:chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --allow-running-insecure-content])
-      bring_chrome_to_foreground() if ENV.has_key?('BUILD_NUMBER')
+      bring_chrome_to_foreground()
       @@driver
+    end
+    
+    def self.reset
+      return self.driver if @@driver.nil?
+      @@driver.close
+      @@driver = nil
+      self.driver
+    end
+    
+    def self.clear_cookies
+      return if @@driver.nil?
+      @@driver.manage.delete_all_cookies
+    end
+    
+    def self.close
+      @@driver.close unless @@driver.nil?
     end
   
     def self.bring_chrome_to_foreground
@@ -19,7 +35,7 @@ module Gosling
     end
   
     def self.method_missing(sym, *args, &block)
-        @@driver.send sym, *args, &block
+      @@driver.send sym, *args, &block
     end
   end
 end
