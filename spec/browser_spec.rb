@@ -31,6 +31,11 @@ describe "Browser" do
     end
   end
   
+  it "should work with element_via_xpath" do
+    visit_page GooglePage do |p|
+      p.page_title_element_from_xpath.text.should == "Google"
+    end
+  end
   
   it "should clear cookies" do
     visit_page GooglePage do |p|

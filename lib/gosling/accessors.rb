@@ -3,7 +3,10 @@ module Gosling
     extend ActiveSupport::Concern
     
     def initialize(visit = false)
-      self.go if visit == true && self.respond_to?(:go)
+      if visit == true && self.respond_to?(:go)
+        self.go
+        on_page?
+      end
     end
     
     def wait_for_something_to_be_true(wait = 10)
@@ -28,12 +31,13 @@ module Gosling
       raise("No matchers found") if on_correct_page.nil?
       on_correct_page
     end  
-          
+    
     module ClassMethods
       def page_url(url)
         define_method("go") do
           url = url.kind_of?(Symbol) ? self.send(url) : url
-          Gosling::Browser.driver.navigate.to(url)      
+          Gosling::Browser.driver.navigate.to(url)   
+          on_page?   
         end
       end  
       
@@ -55,8 +59,6 @@ module Gosling
         end
       end     
       
-    
-      
       def element(name, search)
         define_method(name) do
           webdriver_element = Element.new(search)
@@ -64,6 +66,18 @@ module Gosling
         end  
       end
       
+      def element_via_xpath(name, search_path)
+        element(name, :xpath => search_path)
+      end
+      
+      def element_via_css(name, search_path)
+        element(name, :css => search_path)
+      end
+      
+      def element_via_id(name, search_path)
+        element(name, :id => search_path)
+      end
+          
     end
   end
 end
