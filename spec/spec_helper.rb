@@ -1,6 +1,7 @@
 # encoding: utf-8
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'sections'))
 
 
 require 'rspec'
@@ -9,6 +10,8 @@ require 'pry'
 require 'gosling'
 
 Dir["#{File.dirname(__FILE__)}/pages/*.rb"].each { |f| require f }
+Dir["#{File.dirname(__FILE__)}/sections/*.rb"].each { |f| require f }
+
 
 class RSpec::Core::ExampleGroup
   include Gosling::PageFactory
@@ -21,4 +24,21 @@ RSpec.configure do |config|
   config.before(:all) do
     GC.disable
   end
+end
+
+
+module RSpec
+  module Core
+    class Runner
+    # This monkey-patch apply fix to force RSpec return
+    # proper exit codes.
+    # https://github.com/dchelimsky/rspec/issues#issue/12
+    def self.autorun
+      at_exit {
+        next if $!
+        at_exit {exit run}
+      }
+    end
+  end
+end
 end

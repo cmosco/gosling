@@ -39,7 +39,21 @@ module Gosling
           Gosling::Browser.driver.navigate.to(url)   
           on_page?   
         end
-      end  
+      end
+      
+      def sections(section_names)
+        section_names.each do |section_name|
+          
+          file = "/work/katama/gosling/spec/sections/google_header.rb"
+                require file
+                include self.class.const_get("GoogleHeader")
+                #include self.class.const_get(File.basename(file).gsub('.rb','').split("_").map{|ea| ea.capitalize}.to_s)
+          #}
+          
+          
+          
+        end  
+      end        
       
       def match_page_title(match_text)
         define_method(:on_page_with_title?) do
