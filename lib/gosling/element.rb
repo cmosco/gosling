@@ -18,7 +18,7 @@ module Gosling
       @webdriver_element.send_keys(new_value)
     end
 
-    def wait_for_me(timeout = 5)
+    def wait_for_me(timeout = Gosling.short_timeout)
       return @webdriver_element unless @webdriver_element.nil?
       wait = Selenium::WebDriver::Wait.new(:timeout => timeout) # seconds
       wait.until do
@@ -35,7 +35,7 @@ module Gosling
       end
     end  
 
-    def wait_for_me_to_dissapear(timeout = 5)
+    def wait_for_me_to_dissapear(timeout = Gosling.short_timeout)
       wait = Selenium::WebDriver::Wait.new(:timeout => timeout) # seconds
       wait.until do
         !Gosling::Browser.driver.find_element(@search).displayed?

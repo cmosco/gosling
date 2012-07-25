@@ -42,16 +42,9 @@ module Gosling
       end
       
       def sections(section_names)
-        section_names.each do |section_name|
-          
-          file = "/work/katama/gosling/spec/sections/google_header.rb"
-                require file
-                include self.class.const_get("GoogleHeader")
-                #include self.class.const_get(File.basename(file).gsub('.rb','').split("_").map{|ea| ea.capitalize}.to_s)
-          #}
-          
-          
-          
+        section_names.each do |section_name|    
+          require File.expand_path(File.join(Gosling.sections_path, "#{section_name.to_s.gsub!(/(.)([A-Z])/,'\1_\2').downcase}.rb"))
+          include self.class.const_get(section_name)
         end  
       end        
       

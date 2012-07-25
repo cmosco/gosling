@@ -11,9 +11,10 @@ describe "Browser" do
   end
   
   it "should include the google header section", :focus => true do
+    
     google_home_page = GooglePage.new()
     google_home_page.go
-    google_home_page.puts_something
+    google_home_page.image_link.click
   end
   
   it "should create a browser" do

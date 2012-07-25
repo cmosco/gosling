@@ -26,6 +26,8 @@ RSpec.configure do |config|
   end
 end
 
+Gosling.short_timeout = 10
+Gosling.sections_path = File.join(File.dirname(__FILE__), "sections")
 
 module RSpec
   module Core
