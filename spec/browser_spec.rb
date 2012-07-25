@@ -10,7 +10,7 @@ describe "Browser" do
     Gosling::Browser.reset
   end
   
-  it "should include the google header section", :focus => true do
+  it "should include the google header section" do
     
     google_home_page = GooglePage.new()
     google_home_page.go
