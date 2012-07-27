@@ -11,13 +11,13 @@ describe "Browser" do
   end
   
   it "should include the google header section" do
-    google_home_page = GooglePage.new()
+    google_home_page = GooglePage.new
     google_home_page.go
     google_home_page.image_link.click
   end
   
   it "should create a browser" do
-    google_home_page = GooglePage.new()
+    google_home_page = GooglePage.new
     google_home_page.go
     google_home_page.search_field.value = "hi"
   end
@@ -34,6 +34,15 @@ describe "Browser" do
       p.on_page_with_text?.should be_true
       p.on_page_with_element?.should be_true
       p.on_page?.should be_true
+    end  
+  end
+  
+  it "should work when passing a block into the page class" do
+    GooglePage.new(go => true) do |p|
+      p.on_page_with_title?.should be_true
+      p.on_page_with_text?.should be_true
+      p.on_page_with_element?.should be_true
+      p.on_page?.should be_true
     end
   end
   
@@ -42,6 +51,11 @@ describe "Browser" do
       p.page_title_element_from_xpath.text.should == "Google"
     end
   end
+  
+  it "should call the correct flow", :focus => true do
+    Gosling::Flows.yay_flow
+  end
+  
   
   it "should clear cookies" do
     visit_page GooglePage do |p|

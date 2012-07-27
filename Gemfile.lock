@@ -2,8 +2,6 @@ PATH
   remote: .
   specs:
     gosling (0.1)
-      rspec (>= 2.0.0)
-      selenium-webdriver (>= 2.25.0)
 
 GEM
   remote: http://rubygems.org/

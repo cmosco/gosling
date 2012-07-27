@@ -2,11 +2,10 @@ module Gosling
   module Accessors 
     extend ActiveSupport::Concern
     
-    def initialize(visit = false)
-      if visit == true && self.respond_to?(:go)
-        self.go
-        on_page?
-      end
+    def initialize(controls = {}, &block)
+      self.go if (false || controls[:go] ) && self.respond_to?(:go)
+      block.call self if block
+      self
     end
     
     def wait_for_something_to_be_true(wait = Gosling.short_timeout)

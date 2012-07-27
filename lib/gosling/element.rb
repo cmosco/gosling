@@ -7,6 +7,7 @@ module Gosling
     end
     
     def element
+      # todo add or
       wait_for_me if @webdriver_element.nil?
       @webdriver_element
     end
@@ -42,7 +43,7 @@ module Gosling
     end
   
     def method_missing(sym, *args, &block)
-      wait_for_me if @web_driver_element
+      wait_for_me if @web_driver_element.nil?
       @webdriver_element.send sym, *args, &block
     end
   end
