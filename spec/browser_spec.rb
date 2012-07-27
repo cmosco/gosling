@@ -1,9 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Browser" do
-  
   before(:all) do
     Gosling::Browser.driver
+    Gosling.short_timeout = 10
   end
   
   after(:each) do
@@ -11,7 +11,6 @@ describe "Browser" do
   end
   
   it "should include the google header section" do
-    
     google_home_page = GooglePage.new()
     google_home_page.go
     google_home_page.image_link.click
@@ -49,5 +48,4 @@ describe "Browser" do
     end
     Gosling::Browser.clear_cookies
   end
-  
 end

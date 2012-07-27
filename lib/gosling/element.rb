@@ -1,7 +1,6 @@
 module Gosling
   class Element
     
-    
     def initialize(search, find = true)
       @search = search
       wait_for_me if find
@@ -46,7 +45,5 @@ module Gosling
       wait_for_me if @web_driver_element
       @webdriver_element.send sym, *args, &block
     end
-    
-    
   end
 end

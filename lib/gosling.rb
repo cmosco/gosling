@@ -5,6 +5,7 @@ require 'gosling/element'
 require 'gosling/browser'
 require 'gosling/page_factory'
 require 'gosling/configuration'
+require 'gosling/flow'
 
 
 

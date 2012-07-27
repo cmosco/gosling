@@ -16,6 +16,13 @@ module Gosling
     def sections_path
       @sections_path ||= "spec/sections"
     end
-   
+
+    def flows_path=(path)
+      @flows_path = path
+    end
+    
+    def flows_path
+      @flows_path ||= "spec/flows"
+    end
   end
 end

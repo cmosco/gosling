@@ -5,5 +5,7 @@ gem 'fuubar'
 gem 'selenium-webdriver'
 gem 'pry'
 gem 'activesupport'
+gem "mocha"
+
 
 gemspec

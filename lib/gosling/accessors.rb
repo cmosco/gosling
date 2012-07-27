@@ -9,7 +9,7 @@ module Gosling
       end
     end
     
-    def wait_for_something_to_be_true(wait = 10)
+    def wait_for_something_to_be_true(wait = Gosling.short_timeout)
       count = 0
       while(count < wait) do
         begin
