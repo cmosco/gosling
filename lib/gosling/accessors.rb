@@ -72,15 +72,15 @@ module Gosling
         end  
       end
       
-      def element_via_xpath(name, search_path)
+      def element_xpath(name, search_path)
         element(name, :xpath => search_path)
       end
       
-      def element_via_css(name, search_path)
+      def element_css(name, search_path)
         element(name, :css => search_path)
       end
       
-      def element_via_id(name, search_path)
+      def element_id(name, search_path)
         element(name, :id => search_path)
       end
           

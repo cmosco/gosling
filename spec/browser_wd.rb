@@ -37,7 +37,7 @@ describe "Browser" do
     end
   end
   
-  it "should work with element_via_xpath" do
+  it "should work with element_xpath" do
     visit_page GooglePage do |p|
       p.page_title_element_from_xpath.text.should == "Google"
     end

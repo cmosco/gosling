@@ -1,7 +1,7 @@
 module GoogleHeader
   include Gosling::Accessors
    
-  element_via_xpath(:image_link, "//a//span[text()='Images']")   
+  element_xpath(:image_link, "//a//span[text()='Images']")   
    
     
   def puts_something

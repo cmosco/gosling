@@ -8,16 +8,7 @@ require 'gosling/configuration'
 require 'gosling/flows'
 require 'gosling/flow'
 
-
-
 module Gosling
   include Accessors
   Gosling.send :extend, Gosling::Configuration
-  
-  
-  def initialize(visit=false)
-    #goto if visit && respond_to?(:goto)
-    initialize_page if respond_to?(:initialize_page)
-  end
-  
 end
