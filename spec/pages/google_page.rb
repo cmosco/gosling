@@ -10,6 +10,4 @@ class GooglePage
 	  match_page_text("Search")
 	  match_page_element({:xpath => "//title"}, "Google")
 	  sections([:GoogleHeader])
-    
-    
 end

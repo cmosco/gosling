@@ -1,6 +1,5 @@
 class YayFlow < Gosling::Flow
 
-
 	def perform(params)
 		puts_something(params)
 	end
