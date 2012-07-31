@@ -41,9 +41,16 @@ module Gosling
       end
       
       def sections(section_names)
-        section_names.each do |section_name|    
-          require File.expand_path(File.join(Gosling.sections_path, "#{section_name.to_s.gsub!(/(.)([A-Z])/,'\1_\2').downcase}.rb"))
-          include self.class.const_get(section_name)
+        section_names.each do |section_name| 
+          if section_name.include?("_")
+            file_name = "#{section_name.to_s}.rb"
+            class_name = section_name.split('_').map{|e| e.capitalize}.join
+          else
+            class_name = section_name
+            file_name = "#{section_name.to_s.gsub(/(.)([A-Z])/,'\1_\2').downcase}.rb"
+          end
+          require File.expand_path(File.join(Gosling.sections_path, file_name))
+          include self.class.const_get(class_name)
         end  
       end        
       

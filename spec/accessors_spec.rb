@@ -4,6 +4,10 @@ class AccessorTestPageObject
   include Gosling::Accessors
 end
 
+class AccessorTestPageObject2
+  include Gosling::Accessors
+end
+
 describe Gosling::Accessors do
   before(:each) do
     @page = AccessorTestPageObject.new
@@ -12,6 +16,23 @@ describe Gosling::Accessors do
     fake_driver = stub(:navigate => fake_navigator, :title => "page title", :find_element => fake_element)
     Gosling::Browser.stubs(:webdriver).returns(fake_driver)
     Gosling::Browser.driver.find_element(:tag_name => "body").text
+  end
+
+
+  describe "sections" do
+    it "should add the given section with snake case name" do
+      @page = AccessorTestPageObject.new
+      @page.respond_to?(:puts_something).should be_false
+      @page.class.send(:sections, ["google_header"])
+      @page.respond_to?(:puts_something).should be_true
+    end
+
+    it "should add the given section with camel case name" do
+      @page = AccessorTestPageObject2.new
+      @page.respond_to?(:puts_something).should be_false
+      @page.class.send(:sections, ["GoogleHeader"])
+      @page.respond_to?(:puts_something).should be_true
+    end
   end
   
   describe "page_url" do

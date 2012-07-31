@@ -7,9 +7,7 @@ module Gosling
     end
     
     def element
-      # todo add or
-      wait_for_me if @webdriver_element.nil?
-      @webdriver_element
+      @webdriver_element ||= wait_for_me
     end
   
     def value=(new_value)
@@ -24,6 +22,7 @@ module Gosling
       wait.until do
         @webdriver_element = Gosling::Browser.driver.find_element(@search)
       end
+      @webdriver_element
     end
   
     def exists?

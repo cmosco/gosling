@@ -12,10 +12,6 @@ Dir["#{File.dirname(__FILE__)}/pages/*.rb"].each { |f| require f }
 Dir["#{File.dirname(__FILE__)}/sections/*.rb"].each { |f| require f }
 
 
-class RSpec::Core::ExampleGroup
-  include Gosling::PageFactory
-end
-
 RSpec.configure do |config|
   config.mock_with :mocha
   config.filter_run :focus => true unless ENV.has_key?('BUILD_NUMBER')
