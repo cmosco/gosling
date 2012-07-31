@@ -1,9 +1,11 @@
 class YayFlow < Gosling::Flow
-	def perform
-		puts_something
+
+
+	def perform(params)
+		puts_something(params)
 	end
   
-  def puts_something
-    puts "WOW THIS ACTUALLY WORKED"
+  def puts_something(params)
+    puts "args are #{params}"
   end
 end

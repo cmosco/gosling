@@ -1,10 +1,15 @@
 module Gosling
     class Flows
 
-      def self.method_missing(name, *args, &block)
-        require File.join(Gosling.flows_path, "#{name.to_s}.rb")
-        class_name = camel_case(name.to_s)  
-        Object::const_get(class_name).new.perform    
+      def self.method_missing(name, *params, &block)
+        require File.join(Gosling.flows_path, "#{name.to_s}.rb") unless defined?(name) 
+        class_name = camel_case(name.to_s) 
+        if params
+          Object::const_get(class_name).new.perform(params.first)
+        else
+          Object::const_get(class_name).new.perform
+        end
+
       end
 
       def self.camel_case(file_name)

@@ -1,7 +1,7 @@
 module Gosling
 	class Flow
 
-		def perform
+		def performs
 			Raise "This method must be implemented"
 		end
 	end
