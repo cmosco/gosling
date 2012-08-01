@@ -57,7 +57,7 @@ describe "Browser" do
   end
   
   it "should call the correct flow" do
-    Gosling::Flows.yay_flow
+    Gosling::Flows.yay_flow({:foo => "bar"})
   end
   
   

@@ -4,12 +4,12 @@ describe "method_missing" do
 	it "should create and return a new flow class" do
 		require File.join(Gosling.flows_path, "yay_flow.rb")
 		params = {"foo" => "bar"}
-		puts "got here"
 		YayFlow.any_instance.expects(:perform).with(params)
 		Gosling::Flows.yay_flow(params)
 	end
 
-	it "should work for flows with no params", :focus => true  do
+	it "should work for flows with no params"  do
+		require File.join(Gosling.flows_path, "test_flow.rb")
 		TestFlow.any_instance.expects(:perform)
 		Gosling::Flows.test_flow
 	end
