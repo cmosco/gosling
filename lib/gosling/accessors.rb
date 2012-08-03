@@ -34,6 +34,14 @@ module Gosling
     module ClassMethods
       def page_url(url)
         define_method("go") do
+          if !url.start_with?("http")
+            if !url.start_with?("/")
+              url = "#{Gosling.base_url}/"+url
+            else
+              url = "#{Gosling.base_url}"+url
+            end
+          end
+
           url = url.kind_of?(Symbol) ? self.send(url) : url
           Gosling::Browser.driver.navigate.to(url)   
           on_page?   

@@ -8,6 +8,14 @@ module Gosling
     def short_timeout()
       @short_timeout ||= 5
     end
+
+    def base_url=(url)
+      @base_url = url
+    end
+
+    def base_url
+      @base_url ||= "http://localhost:9000"
+    end
    
     def sections_path=(path)
       @sections_path = path
