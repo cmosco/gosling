@@ -4,13 +4,8 @@ module Gosling
       def self.method_missing(name, *params, &block)
         require File.join(Gosling.flows_path, "#{name.to_s}.rb") unless !defined?(name) 
         class_name = camel_case(name.to_s)
-        puts "gosling #{params}"
-        #if params.size > 0
-        #  Object::const_get(class_name).new.perform(params.first)
-        #else
-          Object::const_get(class_name).new.perform(*params)
-        #end
 
+        Object::const_get(class_name).new.perform(*params)
       end
 
       def self.camel_case(file_name)
