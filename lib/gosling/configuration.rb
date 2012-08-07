@@ -32,5 +32,13 @@ module Gosling
     def flows_path
       @flows_path ||= "spec/flows"
     end
+
+    def default_user=(usr)
+      @default_user = usr
+    end
+
+    def default_user
+      @default_user ||= "schang@brightcove.com"
+    end
   end
 end
