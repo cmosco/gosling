@@ -25,7 +25,12 @@ module Gosling
     def self.close
       @@webdriver.close unless @@webdriver.nil?
     end
-  
+
+    def self.quit
+      @@webdriver.quit unless @@webdriver.nil?
+      @@webdriver = nil
+    end
+
     def self.bring_chrome_to_foreground
       `osascript -e 'tell application "System Events"\n tell process "Chrome"\n set frontmost to true\n end tell\n end tell' >& /dev/null`
     end
