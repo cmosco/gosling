@@ -41,7 +41,6 @@ module Gosling
               url = "#{Gosling.base_url}"+url
             end
           end
-
           url = url.kind_of?(Symbol) ? self.send(url) : url
           Gosling::Browser.driver.navigate.to(url)   
           on_page?   

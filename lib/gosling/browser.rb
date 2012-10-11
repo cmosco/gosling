@@ -1,16 +1,16 @@
 module Gosling
   class Browser
     def self.driver
-      @@webdriver ||= webdriver
+      @@webdriver ||=webdriver
       bring_chrome_to_foreground()
       @@webdriver
     end
     
     def self.reset
       return self.driver if @@webdriver.nil?
+      @@webdriver.clear_cookies
       @@webdriver.close
-      @@webdriver = nil
-      self.driver
+      @@webdriver = self.driver
     end
 
     def self.webdriver
@@ -24,6 +24,7 @@ module Gosling
     
     def self.close
       @@webdriver.close unless @@webdriver.nil?
+      @@webdriver = nil
     end
 
     def self.quit
@@ -46,6 +47,10 @@ module Gosling
     def self.method_missing(sym, *args, &block)
       return self.driver if @@webdriver.nil?
       @@webdriver.send sym, *args, &block
+    end
+
+    def self.text
+      self.find_element(:tag_name => "body").text
     end
   end
 end
