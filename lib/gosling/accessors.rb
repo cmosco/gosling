@@ -68,9 +68,10 @@ module Gosling
         end
       end  
       
-      def match_page_text(match_text)
+      def match_page_text(match_text,alternitive=match_text)
         define_method(:on_page_with_text?) do
-          self.wait_for_something_to_be_true{ Gosling::Browser.driver.find_element(:tag_name => "body").text.include?(match_text) }
+          self.wait_for_something_to_be_true{ Gosling::Browser.page_source.include?(match_text) ||
+          Gosling::Browser.page_source.include?(alternitive)}
         end
       end  
       
