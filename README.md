@@ -1,7 +1,9 @@
 Gosling
 =========
 
-Golsing is a page object model dsl for webdriver based on concepts borrowed from [page-object] and [site prism]
+Golsing is a page object model dsl for webdriver based on concepts borrowed from [page-object] and [site prism]. 
+The goal of Gosling is to make writing page objects faster, without abstracting webdriver out of your code. This allows
+you to interact with elements in a way that you are accustomed to.
 
 Pages
 =========
@@ -23,8 +25,6 @@ which will automatically add the following method to your page class:
 ````ruby
 go
 ````
-
-
 
 Tell gosling how to tell if it's on the correct page:
 ````ruby
@@ -92,8 +92,32 @@ module GoogleHeader
 end
 ````
 
+Flows
+=========
+A flow helps you to reduce code duplication by creating a single way to run through common UI paths. For example, a
+flow could be used to create and log in a user at the start of every test.
 
+````ruby
+class RegisterNewUser
+  def perform
+    register
+    login
+  end
+  
+  def register
+    #log in a new user
+  end
+  
+  def login
+    #log in as newly created user
+  end
+end
+````
 
+A flow can be executed by adding
+````ruby
+Gosling::Flows.register_new_user
+````
 
 
 
