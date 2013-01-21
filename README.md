@@ -119,8 +119,20 @@ A flow can be executed by adding
 Gosling::Flows.register_new_user
 ````
 
+RSPEC
+========
+Putting it all together, a simple rspec test would look like this:
 
-
+````ruby
+  it "should enter in a search term on the google home page" do
+    GooglePage.new(:go => true) do |p|
+      p.on_page_with_title?.should be_true
+      p.on_page_with_text?.should be_true
+      p.on_page_with_element?.should be_true
+      p.on_page?.should be_true  
+      p.search_field.value = "hi"
+  end
+````
   
   [site prism]: https://github.com/natritmeyer/site_prism
   [page-object]: https://github.com/cheezy/page-object
