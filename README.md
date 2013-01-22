@@ -137,7 +137,7 @@ class RegisterNewUser
 end
 ````
 
-A flow can be executed by adding
+A flow can be executed by executing the following. Note that perform is called automatically.
 ````ruby
 Gosling::Flows.register_new_user
 ````
