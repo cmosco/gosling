@@ -74,6 +74,29 @@ class GooglePage
 end
 ````
 
+Blocks
+=========
+
+There are two ways of interacting with your pages. First, you can create a new page object and then call its methods:
+
+````ruby
+google_home_page = GooglePage.new
+google_home_page.go
+google_home_page.image_link.click
+````
+
+However, if you're going to be performing many actions on the same object, performing your actions inside of a block
+may make things more readable:
+
+````ruby
+GooglePage.new(:go => true) do |p|
+  p.perform_action
+  p.click
+  p.text.value = "foo"
+  p.do_something_else
+end  
+````
+
 Sections
 =========
 
@@ -105,7 +128,7 @@ class RegisterNewUser
   end
   
   def register
-    #log in a new user
+    #create a new user
   end
   
   def login
