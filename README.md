@@ -142,6 +142,19 @@ A flow can be executed by executing the following. Note that perform is called a
 Gosling::Flows.register_new_user
 ````
 
+Configuration
+========
+Gosling makes use of a few standard settings that need to be configured in your spec_helper.rb
+
+````ruby
+Gosling.short_timeout = 10
+Gosling.sections_path = File.join(File.dirname(__FILE__), "sections")
+Gosling.flows_path = File.join(File.dirname(__FILE__), "flows")
+````
+
+A full list of configs can be found in Gosling::Configuration
+
+
 RSPEC
 ========
 Putting it all together, a simple rspec test would look like this:
@@ -157,6 +170,11 @@ Putting it all together, a simple rspec test would look like this:
     end
   end
 ````
+
+What's next
+=======
+1. Custom Rspec matchers
+2. Cleanup
   
   [site prism]: https://github.com/natritmeyer/site_prism
   [page-object]: https://github.com/cheezy/page-object
