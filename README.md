@@ -154,6 +154,7 @@ Putting it all together, a simple rspec test would look like this:
       p.on_page_with_element?.should be_true
       p.on_page?.should be_true  
       p.search_field.value = "hi"
+    end
   end
 ````
   
