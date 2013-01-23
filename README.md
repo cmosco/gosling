@@ -74,6 +74,45 @@ class GooglePage
 end
 ````
 
+But wait....
+=========
+
+By default, Gosling provides a few key built in wait's when accessing html elements. 
+
+1. Page wait's - As you navigate from page to page, Gosling will use the values from your match_page_xxxx methods to block all other execution from happening until that page has been reached.
+2. Element wait's - These happen every time you access an element on the page for the first time.
+
+Code in strait webdriver that would look like this:
+
+````ruby
+wait = Selenium::WebDriver::Wait.new(:timeout => 5) # seconds
+wait.until do
+  link = webdriver.find_element(:xpath, "/some/element")
+end
+link.click
+
+wait = Selenium::WebDriver::Wait.new(:timeout => timeout) # seconds
+wait.until do
+  @on_right_next_page_element = webdriver.find_element(:xpath, "/some/element")
+end
+
+wait.until do
+  link = webdriver.find_element(:xpath, "/some/element")
+end
+link.click
+
+
+````
+Now becomes:
+
+````ruby
+test_page_one = TestPageOne.new
+test_page_one.link_to_test_page_two.click
+
+test_page_two = TestPageTwo.new
+test_page_two.another_link.click
+````
+
 Blocks
 =========
 
