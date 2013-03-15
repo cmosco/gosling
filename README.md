@@ -189,6 +189,10 @@ Gosling makes use of a few standard settings that need to be configured in your 
 Gosling.short_timeout = 10
 Gosling.sections_path = File.join(File.dirname(__FILE__), "sections")
 Gosling.flows_path = File.join(File.dirname(__FILE__), "flows")
+Gsoling.driver_type = :chrome
+Gosling.driver_switches = %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --allow-running-insecure-content]
+
+
 ````
 
 A full list of configs can be found in Gosling::Configuration

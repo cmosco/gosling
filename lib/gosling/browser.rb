@@ -47,7 +47,6 @@ module Gosling
     def self.bring_browser_to_foreground
       browser_name = Gosling.driver_type.to_s
       browser_name[0] = browser_name[0].capitalize
-      
       `osascript -e 'tell application "System Events"\n tell process "#{browser_name}"\n set frontmost to true\n end tell\n end tell' >& /dev/null`
     end
 

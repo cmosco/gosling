@@ -78,6 +78,7 @@ describe Gosling::Accessors do
 
     it "should return true if the text matches" do
       @page.class.send(:match_page_text, "page body")
+      Gosling::Browser.stubs(:page_source).returns("page body")
       @page.on_page_with_text?.should be_true
     end
 
