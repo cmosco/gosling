@@ -1,5 +1,22 @@
 module Gosling
   module Configuration
+    
+    def driver_type=(browser_name)
+      @driver = browser_name
+    end
+
+    #(:ie, :internet_explorer, :remote, :chrome, :firefox, :ff, :android, :iphone, :opera, :safari)
+    def driver_type
+      @driver ||= :chrome
+    end
+    
+    def driver_switches
+      @switches ||= []
+    end
+    
+    def driver_switches=(switches)
+      @switches = switches
+    end
         
     def short_timeout=(timeout)
       @short_timeout = timeout

@@ -1,20 +1,32 @@
 module Gosling
   class Browser
     def self.driver
-      @@webdriver ||=webdriver
-      bring_chrome_to_foreground()
+      @@webdriver ||= webdriver
+      bring_browser_to_foreground()
       @@webdriver
     end
     
     def self.reset
       return self.driver if @@webdriver.nil?
-      @@webdriver.clear_cookies
-      @@webdriver.close
+      self.clear_cookies
+      self.close
       @@webdriver = self.driver
     end
 
     def self.webdriver
-      Selenium::WebDriver.for(:chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --allow-running-insecure-content])
+      @driver_type = Gosling.driver_type
+      user_defined_switches = Gosling.driver_switches
+      
+      case @driver_type
+      when :chrome
+        default_switches = %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --allow-running-insecure-content]
+      else
+        default_switches = []
+      end 
+      switches = user_defined_switches.concat(default_switches).uniq       
+      puts "initializing #{@driver_type} browser with #{switches}"    
+      
+      switches.length > 0 ? Selenium::WebDriver.for(@driver_type, :switches => switches) : Selenium::WebDriver.for(@driver_type)
     end
     
     def self.clear_cookies
@@ -31,9 +43,12 @@ module Gosling
       @@webdriver.quit unless @@webdriver.nil?
       @@webdriver = nil
     end
-
-    def self.bring_chrome_to_foreground
-      `osascript -e 'tell application "System Events"\n tell process "Chrome"\n set frontmost to true\n end tell\n end tell' >& /dev/null`
+    
+    def self.bring_browser_to_foreground
+      browser_name = Gosling.driver_type.to_s
+      browser_name[0] = browser_name[0].capitalize
+      
+      `osascript -e 'tell application "System Events"\n tell process "#{browser_name}"\n set frontmost to true\n end tell\n end tell' >& /dev/null`
     end
 
     def self.chrome_file_chooser(target_file_path)

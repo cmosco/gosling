@@ -25,3 +25,4 @@ end
 Gosling.short_timeout = 10
 Gosling.sections_path = File.join(File.dirname(__FILE__), "sections")
 Gosling.flows_path = File.join(File.dirname(__FILE__), "flows")
+Gosling.driver_type = :chrome
