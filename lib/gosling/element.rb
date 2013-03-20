@@ -21,6 +21,7 @@ module Gosling
       wait = Selenium::WebDriver::Wait.new(:timeout => timeout) # seconds
       wait.until do
         @webdriver_element = Gosling::Browser.driver.find_element(@search)
+        @webdriver_element.displayed?
       end
       @webdriver_element
     end
