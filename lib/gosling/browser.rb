@@ -25,8 +25,7 @@ module Gosling
       end 
       switches = user_defined_switches.concat(default_switches).uniq       
       puts "initializing #{@driver_type} browser with #{switches}"    
-      
-      switches.length > 0 ? Selenium::WebDriver.for(@driver_type, :switches => switches) : Selenium::WebDriver.for(@driver_type)
+      switches.length > 0 ? Selenium::WebDriver.for(@driver_type, :switches => switches) : Selenium::WebDriver.for(@driver_type)#, :profile => Selenium::WebDriver::Firefox::Profile.new)
     end
     
     def self.clear_cookies
