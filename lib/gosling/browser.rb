@@ -18,14 +18,15 @@ module Gosling
       user_defined_switches = Gosling.driver_switches
       
       case @driver_type
-      when :chrome
-        default_switches = %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --allow-running-insecure-content]
+      when :ie
+        return Selenium::WebDriver.for(@driver_type)
+      when :firefox
+        return Selenium::WebDriver.for(@driver_type, :profile => Selenium::WebDriver::Firefox::Profile.new)
       else
-        default_switches = []
+        default_switches = %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --allow-running-insecure-content]
+        switches = user_defined_switches.concat(default_switches).uniq
+        return Selenium::WebDriver.for(@driver_type, :switches => switches)        
       end 
-      switches = user_defined_switches.concat(default_switches).uniq       
-      puts "initializing #{@driver_type} browser with #{switches}"    
-      switches.length > 0 ? Selenium::WebDriver.for(@driver_type, :switches => switches) : Selenium::WebDriver.for(@driver_type)#, :profile => Selenium::WebDriver::Firefox::Profile.new)
     end
     
     def self.clear_cookies
