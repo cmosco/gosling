@@ -23,9 +23,12 @@ module Gosling
       when :firefox
         return Selenium::WebDriver.for(@driver_type, :profile => Selenium::WebDriver::Firefox::Profile.new)
       else
-        default_switches = %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --allow-running-insecure-content]
+        default_switches = %w[--start-maximized --ignore-certificate-errors --disable-popup-blocking --disable-translate --allow-running-insecure-content]
         switches = user_defined_switches.concat(default_switches).uniq
-        return Selenium::WebDriver.for(@driver_type, :switches => switches)        
+        driver = Selenium::WebDriver.for(@driver_type, :switches => switches)
+        driver.manage.window.resize_to(1280, 720)
+        driver.manage.window.maximize()
+        return driver       
       end 
     end
     
